@@ -1,0 +1,62 @@
+
+    pagespeed on;
+
+    pagespeed FetchHttps enable,allow_self_signed;
+    pagespeed RewriteLevel PassThrough;
+    pagespeed MapOriginDomain "http://examplebilbao.com" "https://examplebilbao.com";
+
+    pagespeed RewriteLevel CoreFilters;
+    pagespeed EnableFilters insert_dns_prefetch;
+
+    pagespeed EnableFilters combine_css;
+    pagespeed EnableFilters rewrite_css;
+    #pagespeed EnableFilters prioritize_critical_css;
+    #pagespeed EnableFilters flatten_css_imports;
+    #pagespeed EnableFilters outline_css;
+    #pagespeed CssOutlineMinBytes 6000;
+
+    pagespeed EnableFilters defer_javascript;
+    pagespeed EnableFilters combine_javascript;
+    pagespeed EnableFilters rewrite_javascript;
+    pagespeed EnableFilters outline_javascript;
+    #pagespeed JsOutlineMinBytes 6000;
+    pagespeed UseExperimentalJsMinifier on;
+
+    #pagespeed EnableFilters extend_cache;
+
+    pagespeed EnableFilters collapse_whitespace,remove_comments;
+    pagespeed EnableFilters rewrite_style_attributes_with_url;
+    pagespeed EnableFilters rewrite_style_attributes_with_url;
+    pagespeed LowercaseHtmlNames on;
+
+    pagespeed EnableFilters lazyload_images;
+    pagespeed EnableFilters convert_png_to_jpeg,convert_jpeg_to_webp;
+    pagespeed EnableFilters sprite_images;
+    pagespeed EnableFilters inline_preview_images;
+    pagespeed EnableFilters resize_mobile_images;
+    pagespeed EnableFilters responsive_images;
+    pagespeed EnableFilters rewrite_images;
+
+    pagespeed EnableFilters recompress_png;
+    pagespeed EnableFilters recompress_webp;
+    pagespeed EnableFilters jpeg_subsampling;
+    pagespeed EnableFilters resize_images;
+    pagespeed EnableFilters resize_rendered_image_dimensions;
+    pagespeed EnableFilters strip_image_color_profile;
+    pagespeed EnableFilters strip_image_meta_data;
+
+    pagespeed RespectVary on;
+
+    #pagespeed Disallow "*/wp/wp-includes/js/jquery/jquery.js*";
+
+    location ~ "\.pagespeed\.([a-z]\.)?[a-z]{2}\.[^.]{10}\.[^.]+" {
+       add_header "" "";
+        keepalive_timeout 0;
+    }
+
+    location ~ "^/pagespeed_static/" { }
+    location ~ "^/ngx_pagespeed_beacon$" { }
+
+    pagespeed FileCachePath "/var/cache/ngx_pagespeed/";
+    #pagespeed FileCachePath "/tmp/ngx_pagespeed_cache/";
+
