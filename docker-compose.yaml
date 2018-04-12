@@ -1,0 +1,17 @@
+version: "2"
+services:
+  pagespeed:
+    hostname:       pagespeed
+    container_name: pagespeed
+    build:
+      context: ./
+      dockerfile: ./nginx/Dockerfile
+    volumes:
+      - ./nginx/nginx-conf/gzip:/usr/local/nginx/conf/gzip
+      - ./nginx/nginx-conf/mime.types:/usr/local/nginx/conf/mime.types
+      - ./nginx/nginx-conf/nginx.conf:/usr/local/nginx/conf/nginx.conf
+      - ./nginx/nginx-conf/pagespeed:/usr/local/nginx/conf/pagespeed
+      - ./html:/usr/local/nginx/html
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
